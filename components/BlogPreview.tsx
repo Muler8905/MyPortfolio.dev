@@ -98,11 +98,12 @@ Key to success is "System Instructions". By giving the model a persona and stric
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
-          {posts.map((post) => (
+          {posts.map((post, index) => (
             <div 
               key={post.id}
               onClick={onSeeMore}
-              className="group cursor-pointer bg-white dark:bg-[#131b2e] rounded-2xl overflow-hidden shadow-lg border border-gray-100 dark:border-white/5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+              className="group cursor-pointer bg-white dark:bg-[#131b2e] rounded-2xl overflow-hidden shadow-lg border border-gray-100 dark:border-white/5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 opacity-0 animate-morph-top hover-lift"
+              style={{ animationDelay: `${index * 150}ms` }}
             >
               <div className="h-48 overflow-hidden relative">
                 <img 
@@ -110,6 +111,9 @@ Key to success is "System Instructions". By giving the model a persona and stric
                   alt={post.title} 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
+                {/* Shimmer effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer"></div>
+                
                 <div className="absolute top-4 left-4 bg-white/90 dark:bg-black/70 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-violet-600 dark:text-violet-400 uppercase tracking-wide">
                   {post.category}
                 </div>

@@ -13,27 +13,27 @@ interface Testimonial {
 const DEFAULT_TESTIMONIALS: Testimonial[] = [
   {
     id: '1',
-    name: 'Sarah Chen',
-    role: 'Product Manager',
-    company: 'TechFlow Systems',
-    text: "Muluken is one of those rare developers who understands both the code and the business goals. He completely rebuilt our core dashboard, improving performance by 40%.",
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop'
+    name: 'Abebe Kebede',
+    role: 'CEO',
+    company: 'Addis Tech Solutions',
+    text: "Muluken delivered an exceptional e-commerce platform for our business. His understanding of both local market needs and modern web technologies made the project a huge success.",
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop'
   },
   {
     id: '2',
-    name: 'David Miller',
-    role: 'CTO',
-    company: 'DataStream Corp',
-    text: "Exceptional problem solver. His work on the real-time financial charts was flawless. He picks up new technologies incredibly fast.",
-    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200&auto=format&fit=crop'
+    name: 'Tigist Haile',
+    role: 'Founder',
+    company: 'Habesha Digital',
+    text: "Working with Muluken was a game-changer for our startup. He built our mobile-responsive platform from scratch and it's been running smoothly for months. Highly recommended!",
+    avatar: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=200&auto=format&fit=crop'
   },
   {
     id: '3',
-    name: 'James Wilson',
-    role: 'Lead Designer',
-    company: 'Creative Agency X',
-    text: "A developer with a designer's eye. Implementation was pixel-perfect, and he often suggested animations that made the UX even better.",
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop'
+    name: 'Dawit Tesfaye',
+    role: 'Operations Manager',
+    company: 'Ethiopian Logistics Hub',
+    text: "Muluken's work on our inventory management system exceeded expectations. He's professional, responsive, and delivers quality code. A true asset to any project.",
+    avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=200&auto=format&fit=crop'
   }
 ];
 
@@ -117,9 +117,16 @@ const Testimonials: React.FC = () => {
         )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {testimonials.map((item) => (
-                <div key={item.id} className="group relative bg-white dark:bg-[#131b2e] p-8 rounded-3xl shadow-sm border border-gray-100 dark:border-white/5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            {testimonials.map((item, index) => (
+                <div 
+                  key={item.id} 
+                  className="group relative bg-white dark:bg-[#131b2e] p-8 rounded-3xl shadow-sm border border-gray-100 dark:border-white/5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 opacity-0 animate-morph-left hover-tilt"
+                  style={{ animationDelay: `${index * 150}ms` }}
+                >
                     <Quote className="absolute top-8 right-8 text-violet-100 dark:text-violet-900/30 w-12 h-12 rotate-12" />
+                    
+                    {/* Shimmer effect on hover */}
+                    <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer pointer-events-none"></div>
                     
                     <div className="flex items-center gap-1 mb-6 text-yellow-400">
                         {[1,2,3,4,5].map(i => <Star key={i} size={16} fill="currentColor" />)}

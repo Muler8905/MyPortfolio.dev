@@ -153,7 +153,110 @@ const BlogPage: React.FC<BlogPageProps> = ({ onBack }) => {
       </section>
     );
   }
-  // ... rest of BlogPage (detail/create views)
+  if (view === 'detail' && selectedPost) {
+    return (
+      <section className="pt-32 pb-24 min-h-screen bg-gray-50 dark:bg-[#0B0F19] transition-colors duration-300">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <button onClick={() => setView('list')} className="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-violet-600 dark:text-gray-400 dark:hover:text-violet-400 transition-colors mb-8">
+            <ArrowLeft size={16} /> Back to Articles
+          </button>
+
+          <article className="bg-white dark:bg-[#131b2e] rounded-2xl overflow-hidden shadow-xl border border-gray-200 dark:border-white/5">
+            <div className="h-96 overflow-hidden">
+              <img src={selectedPost.imageUrl} alt={selectedPost.title} className="w-full h-full object-cover" />
+            </div>
+            
+            <div className="p-8 md:p-12">
+              <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6">
+                <span className="flex items-center gap-1 bg-violet-100 dark:bg-violet-900/30 px-3 py-1 rounded-full text-violet-600 dark:text-violet-400 font-semibold">
+                  <Tag size={14} /> {selectedPost.category}
+                </span>
+                <span className="flex items-center gap-1"><Calendar size={14} /> {selectedPost.date}</span>
+                <span className="flex items-center gap-1"><Clock size={14} /> {selectedPost.readTime}</span>
+              </div>
+
+              <h1 className="text-4xl md:text-5xl font-display font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+                {selectedPost.title}
+              </h1>
+
+              <div className="flex items-center gap-3 mb-8 pb-8 border-b border-gray-200 dark:border-white/5">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg">
+                  {selectedPost.author.charAt(0)}
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900 dark:text-white">{selectedPost.author}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Full Stack Developer</p>
+                </div>
+              </div>
+
+              <div className="prose prose-lg dark:prose-invert max-w-none">
+                {selectedPost.content.split('\n\n').map((paragraph, index) => (
+                  <p key={index} className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    );
+  }
+
+  if (view === 'create') {
+    return (
+      <section className="pt-32 pb-24 min-h-screen bg-gray-50 dark:bg-[#0B0F19] transition-colors duration-300">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <button onClick={() => { setView('list'); setIsEditing(false); setNewPost({ title: '', excerpt: '', content: '', category: '', imageUrl: '' }); }} className="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-violet-600 dark:text-gray-400 dark:hover:text-violet-400 transition-colors mb-8">
+            <ArrowLeft size={16} /> Cancel
+          </button>
+
+          <div className="bg-white dark:bg-[#131b2e] rounded-2xl p-8 shadow-xl border border-gray-200 dark:border-white/5">
+            <h1 className="text-3xl font-display font-bold text-gray-900 dark:text-white mb-8">
+              {isEditing ? 'Edit Post' : 'Create New Post'}
+            </h1>
+
+            <form onSubmit={handleSavePost} className="space-y-6">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Title</label>
+                <input type="text" value={newPost.title || ''} onChange={(e) => setNewPost({ ...newPost, title: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-white/10 bg-white dark:bg-[#0B0F19] text-gray-900 dark:text-white focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all" placeholder="Enter post title" required />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Category</label>
+                <input type="text" value={newPost.category || ''} onChange={(e) => setNewPost({ ...newPost, category: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-white/10 bg-white dark:bg-[#0B0F19] text-gray-900 dark:text-white focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all" placeholder="e.g., Tech Trends, Frontend, AI" required />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Image URL</label>
+                <input type="url" value={newPost.imageUrl || ''} onChange={(e) => setNewPost({ ...newPost, imageUrl: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-white/10 bg-white dark:bg-[#0B0F19] text-gray-900 dark:text-white focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all" placeholder="https://example.com/image.jpg" />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Excerpt</label>
+                <textarea value={newPost.excerpt || ''} onChange={(e) => setNewPost({ ...newPost, excerpt: e.target.value })} rows={3} className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-white/10 bg-white dark:bg-[#0B0F19] text-gray-900 dark:text-white focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all resize-none" placeholder="Brief summary of the post" required />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Content</label>
+                <textarea value={newPost.content || ''} onChange={(e) => setNewPost({ ...newPost, content: e.target.value })} rows={12} className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-white/10 bg-white dark:bg-[#0B0F19] text-gray-900 dark:text-white focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all resize-none font-mono text-sm" placeholder="Write your post content here..." required />
+              </div>
+
+              <div className="flex gap-4 pt-4">
+                <button type="submit" className="flex items-center gap-2 px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-xl font-semibold hover:bg-violet-600 dark:hover:bg-gray-200 transition-all shadow-lg">
+                  <Save size={18} /> {isEditing ? 'Update Post' : 'Publish Post'}
+                </button>
+                <button type="button" onClick={() => { setView('list'); setIsEditing(false); setNewPost({ title: '', excerpt: '', content: '', category: '', imageUrl: '' }); }} className="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-all">
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return null;
 };
 

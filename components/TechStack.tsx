@@ -42,13 +42,17 @@ const TechStack: React.FC = () => {
           {skills.map((skill, index) => (
             <div 
               key={index}
-              className="group relative z-10 p-6 rounded-2xl bg-gray-50 dark:bg-[#131b2e] border border-gray-200 dark:border-white/5 hover:border-violet-500/30 dark:hover:border-purple-500/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:hover:shadow-none"
+              className="group relative z-10 p-6 rounded-2xl bg-gray-50 dark:bg-[#131b2e] border border-gray-200 dark:border-white/5 hover:border-violet-500/30 dark:hover:border-purple-500/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:hover:shadow-none opacity-0 animate-morph-zoom hover-tilt"
+              style={{ animationDelay: `${index * 100}ms` }}
             >
-              <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center mb-6 shadow-lg shadow-violet-900/20 group-hover:scale-110 transition-transform">
+              {/* Shimmer effect */}
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer pointer-events-none"></div>
+              
+              <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center mb-6 shadow-lg shadow-violet-900/20 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 relative z-10">
                 {skill.icon}
               </div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{skill.name}</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 relative z-10">{skill.name}</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed relative z-10">
                 {skill.description}
               </p>
             </div>

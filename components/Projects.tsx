@@ -57,11 +57,12 @@ const Projects: React.FC<ProjectsProps> = ({ onProjectClick }) => {
 
         {displayProjects.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {displayProjects.map((project) => (
+            {displayProjects.map((project, index) => (
               <div 
                 key={project.id} 
                 onClick={() => onProjectClick && onProjectClick(project.id)}
-                className="group bg-gray-50 dark:bg-[#131b2e] rounded-2xl overflow-hidden border border-gray-200 dark:border-white/5 hover:border-violet-500/30 transition-all hover:shadow-2xl hover:shadow-violet-900/10 dark:hover:shadow-violet-900/10 cursor-pointer flex flex-col h-full relative"
+                className="group bg-gray-50 dark:bg-[#131b2e] rounded-2xl overflow-hidden border border-gray-200 dark:border-white/5 hover:border-violet-500/30 transition-all hover:shadow-2xl hover:shadow-violet-900/10 dark:hover:shadow-violet-900/10 cursor-pointer flex flex-col h-full relative hover-lift opacity-0 animate-morph-bottom"
+                style={{ animationDelay: `${index * 150}ms` }}
               >
                 <div className="relative h-48 overflow-hidden shrink-0">
                   <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent z-10 opacity-60" />
@@ -70,6 +71,9 @@ const Projects: React.FC<ProjectsProps> = ({ onProjectClick }) => {
                     alt={project.title} 
                     className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                   />
+                  {/* Shimmer effect on hover */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer"></div>
+                  
                   {/* Delete Button Overlay */}
                   <div className="absolute top-2 right-2 flex gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity z-20">
                      <button 

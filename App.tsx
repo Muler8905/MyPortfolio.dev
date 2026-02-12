@@ -14,6 +14,7 @@ import ProjectPage from './components/ProjectPage';
 import StarBackground from './components/StarBackground';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
+import AcademicExcellence from './components/AcademicExcellence';
 
 function App() {
   const [isDark, setIsDark] = useState(true);
@@ -69,6 +70,7 @@ function App() {
           <>
             <Hero onNavigate={handleNavigate} />
             <AboutPreview onReadMore={() => handleNavigate('about')} />
+            <AcademicExcellence />
             <TechStack />
             <ExperienceSection />
             <Projects onProjectClick={(id) => handleNavigate('project-details', id)} />
