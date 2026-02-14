@@ -7,7 +7,7 @@ export const DEFAULT_PROJECTS: Project[] = [
     description: 'An AI-powered SaaS platform allowing content creators to generate high-CTR thumbnails using text prompts.',
     longDescription: 'AI YouTube Thumbnail Generator is a cutting-edge SaaS application designed to revolutionize how content creators design their YouTube thumbnails. By leveraging the power of Google\'s Gemini API and advanced image generation models, users can simply describe their video concept in text, and the system generates high-quality, click-optimized thumbnails in seconds. The platform includes a drag-and-drop editor for final touches, user authentication, and a credit-based payment system.',
     tags: ['Next.js', 'React', 'Gemini API', 'Tailwind CSS', 'Stripe', 'PostgreSQL'],
-    imageUrl: 'https://picsum.photos/id/20/1200/800',
+    imageUrl: 'https://i.ytimg.com/vi/fFDfd2ZhYjk/maxresdefault.jpg',
     repoUrl: 'https://github.com/Muler8905/-Muler8905-AI-You-tube-Thaminal-Generator',
     demoUrl: 'https://ai.studio/apps/drive/1-TUt9noZtxaxsDkKrB5dOGhyGqLZDP6P?fullscreenApplet=true',
     features: [
@@ -21,45 +21,40 @@ export const DEFAULT_PROJECTS: Project[] = [
   },
   {
     id: '2',
-    title: 'FinTech Dashboard',
-    description: 'Real-time cryptocurrency trading interface with sub-millisecond updates, interactive charts, and portfolio management.',
-    longDescription: 'This comprehensive FinTech Dashboard provides traders with a professional-grade interface for monitoring cryptocurrency markets. Built with performance in mind, it utilizes WebSockets for live price feeds and D3.js for rendering complex, high-frequency financial charts without rendering lag. The application supports multiple wallets, transaction history tracking, and predictive market analysis indicators.',
+    title: 'Event Registration System',
+    description: 'A comprehensive, full-stack event registration system built with React, Node.js, and modern web technologies. Features real-time analytics, professional UI/UX, and enterprise-grade functionality.',
+    longDescription: 'TAn Event Registration System is a web-based application that allows organizers to create, manage, and monitor events while enabling users to browse and register for events online. The system streamlines the registration process by providing features such as event listing, attendee management, online booking, and automated notifications. It improves event organization efficiency, reduces manual workload, and enhances user experience through a simple and interactive interface.',
     tags: ['TypeScript', 'React', 'WebSocket', 'D3.js', 'Node.js', 'Redis'],
-    imageUrl: 'https://picsum.photos/id/3/1200/800',
-    repoUrl: 'https://github.com/Muler8905',
-    demoUrl: '#',
+    imageUrl: 'https://media.gettyimages.com/id/1641611858/photo/asian-event-participants-guest-registering-at-reception-desk-attending-business-conference.jpg?s=612x612&w=0&k=20&c=H9gFODAe4Mj0LZcuuNQE9WHgN7RR4a9Y9cGLcIVKtvE=',
+    repoUrl: 'https://github.com/Muler8905/Event_Registration_System',
+    demoUrl: 'https://muler8905.github.io/Event_Registration_System/',
     features: [
-      'Live WebSocket data streaming for 50+ pairs',
-      'Interactive candlestick charts with technical indicators',
-      'Portfolio performance tracking and aggregation',
-      'Dark/Light mode optimized for prolonged usage',
-      'Secure JWT authentication with session management'
+      
+      '🚀 Key Features',
+'Core Functionality',
+'User Management: Registration, authentication, and profile management with JWT',
+'Event Management: Create, edit, delete, and manage events with full CRUD operations',
+'Registration System: Event registration with capacity management and status tracking',
+'Admin Dashboard: Comprehensive admin panel with real-time analytics and monitoring',
+'Email Notifications: Automated email confirmations and notifications',
+'Advanced Features ✨',
+'Real-time Analytics: Live dashboard updates with WebSocket connections',
+'Professional Charts: Interactive data visualizations with smooth animations',
+'Advanced Navigation: Forward/back navigation with breadcrumb trails',
+'Dynamic Footer: Context-aware footer with admin-specific navigation',
+'Export Functionality: CSV export and comprehensive data backup capabilities',
+'System Health Monitoring: Real-time system status and performance metrics',
+'Live Activity Feed: Real-time activity tracking with filtering and categorization'
     ]
   },
-  {
+ 
+   {
     id: '3',
-    title: 'HealthTrack Pro',
-    description: 'HIPAA-compliant patient management system for private clinics. Features appointment scheduling and telemedicine.',
-    longDescription: 'HealthTrack Pro is a robust Electronic Health Record (EHR) system tailored for small to medium-sized private clinics. It digitizes the entire patient lifecycle, from appointment booking to diagnosis and prescription. Security was the primary focus, employing end-to-end encryption for patient data and strictly adhering to HIPAA compliance standards. It also features a built-in video consultation module using WebRTC.',
-    tags: ['React Native', 'PostgreSQL', 'AWS', 'Docker', 'WebRTC', 'Node.js'],
-    imageUrl: 'https://picsum.photos/id/4/1200/800',
-    repoUrl: 'https://github.com/Muler8905',
-    demoUrl: '#',
-    features: [
-      'Secure patient record management (EMR)',
-      'Real-time appointment scheduling with calendar sync',
-      'Integrated HD video consultation (Telemedicine)',
-      'Automated prescription PDF generation',
-      'Role-based access control (RBAC) for doctors and staff'
-    ]
-  },
-  {
-    id: '4',
     title: 'Fitness Hub AI',
     description: 'Personalized workout and diet plan generator using AI to tailor schedules to user biometrics.',
     longDescription: 'Fitness Hub uses generative AI to create highly personalized fitness regimes. Unlike static apps, it adapts to the user\'s progress, available equipment, and dietary restrictions. The backend processes user feedback to refine future recommendations, acting as a virtual personal trainer.',
     tags: ['React', 'OpenAI API', 'Tailwind', 'MongoDB'],
-    imageUrl: 'https://picsum.photos/id/96/1200/800',
+    imageUrl: 'https://img.freepik.com/free-vector/sport-youtube-thumbnail-template_23-2148599067.jpg?t=st=1771012609~exp=1771016209~hmac=b9eba3bdd485e545a226c6f11b9d0d835f960479c2e7935fb3167dfcb6a11fea',
     repoUrl: 'https://github.com/Muler8905',
     demoUrl: '#',
     features: [

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Award, GraduationCap, Trophy, Star } from 'lucide-react';
+import React, { useState } from 'react';
+import { Award, GraduationCap, Trophy, Star, X, ZoomIn } from 'lucide-react';
 
 interface AcademicCard {
   id: string;
@@ -9,6 +9,7 @@ interface AcademicCard {
   year: string;
   icon: 'award' | 'graduation' | 'trophy' | 'star';
   color: string;
+  certificateImage?: string;
 }
 
 const academicData: AcademicCard[] = [
@@ -16,34 +17,37 @@ const academicData: AcademicCard[] = [
     id: '1',
     title: 'Ministry Exam',
     institution: 'Ethiopian Ministry of Education',
-    result: '95.8%',
+    result: '99.8%',
     year: '2019',
     icon: 'trophy',
-    color: 'from-amber-500 to-orange-600'
+    color: 'from-amber-500 to-orange-600',
+    certificateImage: '/certificates/ministry-cert.jpg'
   },
   {
     id: '2',
     title: 'Preparatory School',
     institution: 'Aleta Wendo Preparatory School',
-    result: 'GPA 3.9/4.0',
+    result: 'GPA 3.6/4.0',
     year: '2021',
     icon: 'award',
-    color: 'from-blue-500 to-cyan-600'
+    color: 'from-blue-500 to-cyan-600',
+    certificateImage: '/certificates/preparatory-cert.jpg'
   },
   {
     id: '3',
     title: 'University Entrance',
     institution: 'National Entrance Examination',
-    result: '620/700',
+    result: '444/700',
     year: '2023',
     icon: 'star',
-    color: 'from-violet-500 to-purple-600'
+    color: 'from-violet-500 to-purple-600',
+    certificateImage: '/certificates/entrance-cert.jpg'
   },
   {
     id: '4',
     title: 'University (Current)',
     institution: 'Dire Dawa University',
-    result: 'CGPA 3.85/4.0',
+    result: 'CGPA 3.54/4.0',
     year: '2023 - 2027',
     icon: 'graduation',
     color: 'from-emerald-500 to-teal-600'
@@ -51,6 +55,7 @@ const academicData: AcademicCard[] = [
 ];
 
 const AcademicExcellence: React.FC = () => {
+  const [selectedCertificate, setSelectedCertificate] = useState<string | null>(null);
   const getIcon = (iconType: string) => {
     switch (iconType) {
       case 'trophy': return <Trophy size={28} />;
@@ -87,13 +92,31 @@ const AcademicExcellence: React.FC = () => {
           {academicData.map((item, index) => (
             <div
               key={item.id}
-              className="group relative bg-gradient-to-br from-white to-gray-50 dark:from-[#131b2e] dark:to-[#0d1420] rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-white/5 hover:shadow-2xl hover:scale-105 hover:-translate-y-2 transition-all duration-500 cursor-pointer overflow-hidden"
+              onClick={() => item.certificateImage && setSelectedCertificate(item.certificateImage)}
+              className={`group relative bg-gradient-to-br from-white to-gray-50 dark:from-[#131b2e] dark:to-[#0d1420] rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-white/5 hover:shadow-2xl hover:scale-105 hover:-translate-y-2 transition-all duration-500 overflow-hidden ${item.certificateImage ? 'cursor-pointer' : ''}`}
               style={{
                 animationDelay: `${index * 100}ms`,
                 animation: 'fadeInUp 0.6s ease-out forwards',
                 opacity: 0
               }}
             >
+              {/* Certificate preview overlay on hover */}
+              {item.certificateImage && (
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none">
+                  <img 
+                    src={item.certificateImage} 
+                    alt={`${item.title} Certificate`}
+                    className="w-full h-full object-cover opacity-20 blur-sm"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-center justify-center">
+                    <div className="flex items-center gap-2 text-white font-semibold">
+                      <ZoomIn size={20} />
+                      <span>View Certificate</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {/* Animated gradient background on hover */}
               <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
               
@@ -142,6 +165,31 @@ const AcademicExcellence: React.FC = () => {
           ))}
         </div>
       </div>
+
+      {/* Certificate Modal */}
+      {selectedCertificate && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in-up"
+          onClick={() => setSelectedCertificate(null)}
+        >
+          <div className="relative max-w-4xl w-full max-h-[90vh] bg-white dark:bg-[#131b2e] rounded-2xl shadow-2xl overflow-hidden">
+            <button
+              onClick={() => setSelectedCertificate(null)}
+              className="absolute top-4 right-4 z-10 p-2 bg-white/90 dark:bg-black/80 rounded-full text-gray-700 dark:text-gray-200 hover:bg-red-500 hover:text-white transition-all shadow-lg"
+            >
+              <X size={24} />
+            </button>
+            <div className="overflow-auto max-h-[90vh] p-4">
+              <img 
+                src={selectedCertificate} 
+                alt="Certificate" 
+                className="w-full h-auto rounded-lg"
+                onClick={(e) => e.stopPropagation()}
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
       <style>{`
         @keyframes fadeInUp {

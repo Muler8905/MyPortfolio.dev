@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowLeft, User, MapPin, Calendar, BookOpen, Cpu, Camera, RefreshCw } from 'lucide-react';
+import { ArrowLeft, MapPin, Calendar, BookOpen, Cpu, Camera, RefreshCw } from 'lucide-react';
 
 interface AboutProps {
   onBack?: () => void;
@@ -111,12 +111,12 @@ const About: React.FC<AboutProps> = ({ onBack }) => {
         <div className="bg-white dark:bg-[#131b2e] rounded-3xl shadow-xl dark:shadow-none border border-gray-200 dark:border-white/5 overflow-hidden">
           
           {/* Header Image / Banner - Responsive Height Fix */}
-          <div className="relative h-32 xs:h-40 sm:h-56 md:h-72 w-full overflow-hidden">
+          <div className="relative h-32 xs:h-40 sm:h-56 md:h-64 w-full overflow-hidden bg-[#0a0a0a]">
              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
              <img 
-               src="https://media.licdn.com/dms/image/v2/D4D16AQHgDIa-WaS3iw/profile-displaybackgroundimage-shrink_350_1400/B4DZo2MeOSKIAc-/0/1761845833705?e=1767225600&v=beta&t=eQesyafC0hNNtFye3gpriL_yEXEQ-eegF7aLC-CMcR8" 
-               alt="Workspace Banner" 
-               className="w-full h-full object-cover object-center md:object-right-bottom transition-transform duration-700 hover:scale-105"
+               src="/muluken-banner.jpg" 
+               alt="Muluken.dev Banner" 
+               className="w-full h-full object-contain object-center transition-transform duration-700 hover:scale-105"
              />
           </div>
 

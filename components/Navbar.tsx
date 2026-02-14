@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Github, Linkedin, Sun, Moon } from 'lucide-react';
+import { Menu, X, Github, Linkedin, Sun, Moon, MapPinX } from 'lucide-react';
 
 interface NavbarProps {
   isDark: boolean;
@@ -49,9 +49,11 @@ const Navbar: React.FC<NavbarProps> = ({ isDark, toggleTheme, onNavigate }) => {
             className="flex-shrink-0 flex items-center gap-2 cursor-pointer group" 
             onClick={() => handleLinkClick('home')}
           >
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-purple-600 dark:from-blue-400 dark:to-purple-600 font-display font-bold text-2xl tracking-tight transition-transform duration-300 group-hover:scale-105">
-              Muluken.dev
-            </span>
+            <img 
+              src='/muluken-banner.jpg' 
+              alt="Muluken.dev" 
+              className="h-8 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            />
           </div>
 
           {/* Desktop Nav */}
