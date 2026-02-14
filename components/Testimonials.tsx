@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Quote, Star, Plus, User, Trash2 } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Quote, Star, Plus, Trash2, ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
 
 interface Testimonial {
   id: string;
@@ -37,12 +37,61 @@ const DEFAULT_TESTIMONIALS: Testimonial[] = [
   }
 ];
 
+const AUTO_SLIDE_INTERVAL = 5000; // 5 seconds
+
 const Testimonials: React.FC = () => {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [isAdding, setIsAdding] = useState(false);
   const [newTestimonial, setNewTestimonial] = useState<Partial<Testimonial>>({
       name: '', role: '', company: '', text: ''
   });
+  const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('portfolio_testimonials');
+    if (stored) {
+        setTestimonials(JSON.parse(stored));
+    } else {
+        setTestimonials(DEFAULT_TESTIMONIALS);
+        localStorage.setItem('portfolio_testimonials', JSON.stringify(DEFAULT_TESTIMONIALS));
+    }
+  }, []);
+
+  // Auto-slide functionality
+  useEffect(() => {
+    if (isAutoPlaying && testimonials.length > 0) {
+      autoPlayRef.current = setInterval(() => {
+        setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+      }, AUTO_SLIDE_INTERVAL);
+    }
+
+    return () => {
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current);
+      }
+    };
+  }, [isAutoPlaying, testimonials.length]);
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
+    setIsAutoPlaying(false);
+  };
+
+  const goToPrevious = () => {
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    setIsAutoPlaying(false);
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    setIsAutoPlaying(false);
+  };
+
+  const toggleAutoPlay = () => {
+    setIsAutoPlaying(!isAutoPlaying);
+  };
 
   useEffect(() => {
     const stored = localStorage.getItem('portfolio_testimonials');
@@ -91,12 +140,21 @@ const Testimonials: React.FC = () => {
               Feedback from people I've collaborated with.
             </p>
           </div>
-          <button 
-             onClick={() => setIsAdding(!isAdding)}
-             className="flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-[#131b2e] border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white rounded-xl font-semibold hover:border-violet-500 transition-all shadow-sm"
-           >
-             <Plus size={18} /> Add Review
-           </button>
+          <div className="flex items-center gap-3">
+            <button 
+               onClick={toggleAutoPlay}
+               className="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-[#131b2e] border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white rounded-xl font-semibold hover:border-violet-500 transition-all shadow-sm"
+               title={isAutoPlaying ? "Pause auto-slide" : "Resume auto-slide"}
+             >
+               {isAutoPlaying ? <Pause size={18} /> : <Play size={18} />}
+             </button>
+            <button 
+               onClick={() => setIsAdding(!isAdding)}
+               className="flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-[#131b2e] border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white rounded-xl font-semibold hover:border-violet-500 transition-all shadow-sm"
+             >
+               <Plus size={18} /> Add Review
+             </button>
+          </div>
         </div>
 
         {/* Add Form */}
@@ -116,31 +174,55 @@ const Testimonials: React.FC = () => {
             </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {testimonials.map((item, index) => (
+        {/* Carousel Container */}
+        <div className="relative">
+          {/* Navigation Buttons */}
+          <button
+            onClick={goToPrevious}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-20 p-3 bg-white dark:bg-[#131b2e] border border-gray-200 dark:border-white/10 rounded-full shadow-lg hover:bg-violet-600 hover:text-white dark:hover:bg-violet-600 transition-all hover:scale-110"
+            aria-label="Previous testimonial"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          
+          <button
+            onClick={goToNext}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 p-3 bg-white dark:bg-[#131b2e] border border-gray-200 dark:border-white/10 rounded-full shadow-lg hover:bg-violet-600 hover:text-white dark:hover:bg-violet-600 transition-all hover:scale-110"
+            aria-label="Next testimonial"
+          >
+            <ChevronRight size={24} />
+          </button>
+
+          {/* Slides */}
+          <div className="overflow-hidden">
+            <div 
+              className="flex transition-transform duration-700 ease-in-out"
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+            >
+              {testimonials.map((item) => (
                 <div 
                   key={item.id} 
-                  className="group relative bg-white dark:bg-[#131b2e] p-8 rounded-3xl shadow-sm border border-gray-100 dark:border-white/5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 opacity-0 animate-morph-left hover-tilt"
-                  style={{ animationDelay: `${index * 150}ms` }}
+                  className="w-full flex-shrink-0 px-4"
                 >
-                    <Quote className="absolute top-8 right-8 text-violet-100 dark:text-violet-900/30 w-12 h-12 rotate-12" />
+                  <div className="group relative bg-white dark:bg-[#131b2e] p-8 md:p-12 rounded-3xl shadow-xl border border-gray-100 dark:border-white/5 hover:shadow-2xl transition-all duration-300 max-w-4xl mx-auto">
+                    <Quote className="absolute top-8 right-8 text-violet-100 dark:text-violet-900/30 w-16 h-16 rotate-12" />
                     
                     {/* Shimmer effect on hover */}
                     <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer pointer-events-none"></div>
                     
                     <div className="flex items-center gap-1 mb-6 text-yellow-400">
-                        {[1,2,3,4,5].map(i => <Star key={i} size={16} fill="currentColor" />)}
+                        {[1,2,3,4,5].map(i => <Star key={i} size={20} fill="currentColor" />)}
                     </div>
 
-                    <p className="text-gray-600 dark:text-gray-300 mb-8 leading-relaxed relative z-10">
+                    <p className="text-gray-600 dark:text-gray-300 text-lg md:text-xl mb-10 leading-relaxed relative z-10 italic">
                         "{item.text}"
                     </p>
 
-                    <div className="flex items-center gap-4 mt-auto">
-                        <img src={item.avatar} alt={item.name} className="w-12 h-12 rounded-full object-cover border-2 border-gray-100 dark:border-white/5" />
+                    <div className="flex items-center gap-5 mt-auto">
+                        <img src={item.avatar} alt={item.name} className="w-16 h-16 rounded-full object-cover border-4 border-gray-100 dark:border-white/5 shadow-lg" />
                         <div>
-                            <h4 className="font-bold text-gray-900 dark:text-white text-sm">{item.name}</h4>
-                            <p className="text-xs text-violet-600 dark:text-violet-400 font-medium">
+                            <h4 className="font-bold text-gray-900 dark:text-white text-lg">{item.name}</h4>
+                            <p className="text-sm text-violet-600 dark:text-violet-400 font-medium">
                                 {item.role} {item.company && `@ ${item.company}`}
                             </p>
                         </div>
@@ -149,13 +231,32 @@ const Testimonials: React.FC = () => {
                     {/* Delete button (hidden by default, shown on hover) */}
                     <button 
                         onClick={() => handleDelete(item.id)}
-                        className="absolute bottom-4 right-4 p-2 text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="absolute bottom-6 right-6 p-2 text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
                         title="Delete Review"
                     >
-                        <Trash2 size={16} />
+                        <Trash2 size={18} />
                     </button>
+                  </div>
                 </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Dots Indicator */}
+          <div className="flex justify-center gap-2 mt-8">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`transition-all duration-300 rounded-full ${
+                  index === currentIndex
+                    ? 'w-8 h-3 bg-violet-600 dark:bg-violet-400'
+                    : 'w-3 h-3 bg-gray-300 dark:bg-gray-600 hover:bg-violet-400'
+                }`}
+                aria-label={`Go to testimonial ${index + 1}`}
+              />
             ))}
+          </div>
         </div>
       </div>
     </section>
