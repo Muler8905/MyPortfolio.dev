@@ -8,7 +8,7 @@ export const DEFAULT_PROJECTS: Project[] = [
     longDescription: 'AI YouTube Thumbnail Generator is a cutting-edge SaaS application designed to revolutionize how content creators design their YouTube thumbnails. By leveraging the power of Google\'s Gemini API and advanced image generation models, users can simply describe their video concept in text, and the system generates high-quality, click-optimized thumbnails in seconds. The platform includes a drag-and-drop editor for final touches, user authentication, and a credit-based payment system.',
     tags: ['Next.js', 'React', 'Gemini API', 'Tailwind CSS', 'Stripe', 'PostgreSQL'],
     imageUrl: 'https://i.ytimg.com/vi/fFDfd2ZhYjk/maxresdefault.jpg',
-    repoUrl: 'https://github.com/Muler8905/-Muler8905-AI-You-tube-Thaminal-Generator',
+    repoUrl: 'https://github.com/Muler8905/AI-YouTube-Thumbnail-Generator',
     demoUrl: 'https://ai-you-tube-thumbnail-generator-indol.vercel.app/',
     features: [
       'Text-to-Image Generation using Gemini Vision capabilities',
