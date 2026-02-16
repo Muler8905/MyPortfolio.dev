@@ -9,7 +9,7 @@ export const DEFAULT_PROJECTS: Project[] = [
     tags: ['Next.js', 'React', 'Gemini API', 'Tailwind CSS', 'Stripe', 'PostgreSQL'],
     imageUrl: 'https://i.ytimg.com/vi/fFDfd2ZhYjk/maxresdefault.jpg',
     repoUrl: 'https://github.com/Muler8905/-Muler8905-AI-You-tube-Thaminal-Generator',
-    demoUrl: 'https://ai.studio/apps/drive/1-TUt9noZtxaxsDkKrB5dOGhyGqLZDP6P?fullscreenApplet=true',
+    demoUrl: 'https://ai-you-tube-thumbnail-generator-indol.vercel.app/',
     features: [
       'Text-to-Image Generation using Gemini Vision capabilities',
       'Real-time credit system integrated with Stripe',
@@ -56,7 +56,7 @@ export const DEFAULT_PROJECTS: Project[] = [
     tags: ['React', 'OpenAI API', 'Tailwind', 'MongoDB'],
     imageUrl: 'https://img.freepik.com/free-vector/sport-youtube-thumbnail-template_23-2148599067.jpg?t=st=1771012609~exp=1771016209~hmac=b9eba3bdd485e545a226c6f11b9d0d835f960479c2e7935fb3167dfcb6a11fea',
     repoUrl: 'https://github.com/Muler8905',
-    demoUrl: '#',
+    demoUrl: 'https://6000-firebase-studio-1752541410920.cluster-6vyo4gb53jczovun3dxslzjahs.cloudworkstations.dev/',
     features: [
       'AI-generated weekly workout schedules',
       'Calorie and macro calculator based on biometrics',

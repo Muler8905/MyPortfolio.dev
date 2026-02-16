@@ -61,8 +61,7 @@ const Projects: React.FC<ProjectsProps> = ({ onProjectClick }) => {
               <div 
                 key={project.id} 
                 onClick={() => onProjectClick && onProjectClick(project.id)}
-                className="group bg-gray-50 dark:bg-[#131b2e] rounded-2xl overflow-hidden border border-gray-200 dark:border-white/5 hover:border-violet-500/30 transition-all hover:shadow-2xl hover:shadow-violet-900/10 dark:hover:shadow-violet-900/10 cursor-pointer flex flex-col h-full relative hover-lift opacity-0 animate-morph-bottom"
-                style={{ animationDelay: `${index * 150}ms` }}
+                className="fade-up-on-scroll group bg-gray-50 dark:bg-[#131b2e] rounded-2xl overflow-hidden border border-gray-200 dark:border-white/5 hover:border-violet-500/30 transition-all hover:shadow-2xl hover:shadow-violet-900/10 dark:hover:shadow-violet-900/10 cursor-pointer flex flex-col h-full relative hover-lift"
               >
                 <div className="relative h-48 overflow-hidden shrink-0">
                   <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent z-10 opacity-60" />

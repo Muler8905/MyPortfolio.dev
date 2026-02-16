@@ -15,6 +15,7 @@ import StarBackground from './components/StarBackground';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import AcademicExcellence from './components/AcademicExcellence';
+import { initScrollAnimations } from './utils/scrollAnimation';
 
 function App() {
   const [isDark, setIsDark] = useState(true);
@@ -28,6 +29,12 @@ function App() {
       document.documentElement.classList.remove('dark');
     }
   }, [isDark]);
+
+  // Initialize scroll animations
+  useEffect(() => {
+    const observer = initScrollAnimations();
+    return () => observer.disconnect();
+  }, [currentPage]);
 
   const toggleTheme = () => setIsDark(!isDark);
 

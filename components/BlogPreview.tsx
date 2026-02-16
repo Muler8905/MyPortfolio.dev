@@ -102,8 +102,7 @@ Key to success is "System Instructions". By giving the model a persona and stric
             <div 
               key={post.id}
               onClick={onSeeMore}
-              className="group cursor-pointer bg-white dark:bg-[#131b2e] rounded-2xl overflow-hidden shadow-lg border border-gray-100 dark:border-white/5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 opacity-0 animate-morph-top hover-lift"
-              style={{ animationDelay: `${index * 150}ms` }}
+              className="fade-up-on-scroll group cursor-pointer bg-white dark:bg-[#131b2e] rounded-2xl overflow-hidden shadow-lg border border-gray-100 dark:border-white/5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 hover-lift"
             >
               <div className="h-48 overflow-hidden relative">
                 <img 

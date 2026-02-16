@@ -93,12 +93,7 @@ const AcademicExcellence: React.FC = () => {
             <div
               key={item.id}
               onClick={() => item.certificateImage && setSelectedCertificate(item.certificateImage)}
-              className={`group relative bg-gradient-to-br from-white to-gray-50 dark:from-[#131b2e] dark:to-[#0d1420] rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-white/5 hover:shadow-2xl hover:scale-105 hover:-translate-y-2 transition-all duration-500 overflow-hidden ${item.certificateImage ? 'cursor-pointer' : ''}`}
-              style={{
-                animationDelay: `${index * 100}ms`,
-                animation: 'fadeInUp 0.6s ease-out forwards',
-                opacity: 0
-              }}
+              className={`fade-up-on-scroll group relative bg-gradient-to-br from-white to-gray-50 dark:from-[#131b2e] dark:to-[#0d1420] rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-white/5 hover:shadow-2xl hover:scale-105 hover:-translate-y-2 transition-all duration-500 overflow-hidden ${item.certificateImage ? 'cursor-pointer' : ''}`}
             >
               {/* Certificate preview overlay on hover */}
               {item.certificateImage && (
